@@ -9,7 +9,7 @@ const NoiseTexture: React.FC<NoiseTextureProps> = ({ opacity = 1 }) => {
   return (
     <View style={styles.container} pointerEvents="none">
       <Image
-        source={require("../../assets/images/home_screen_bg.png")}
+        source={require("../assets/images/home_screen_bg.png")}
         style={[styles.noiseImage, { opacity }]}
         resizeMode="cover"
       />
