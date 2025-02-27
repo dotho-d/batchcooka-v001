@@ -62,7 +62,7 @@ export default function WelcomeScreen() {
         <View style={styles.buttonContainer}>
           <Pressable
             style={[styles.button, styles.primaryButton]}
-            onPress={() => router.push("/auth/register")}
+            onPress={() => router.push("/(auth)/register")}
           >
             <Text style={[styles.buttonText, styles.primaryButtonText]}>
               S'inscrire
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     ...StyleSheet.absoluteFillObject,
-    opacity: 0.2, // Réglez l'opacité ici
+    opacity: 0.8,
   },
   background: {
     ...StyleSheet.absoluteFillObject,
