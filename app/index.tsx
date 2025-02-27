@@ -37,6 +37,11 @@ export default function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../assets/images/home_screen_bg.png")}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      />
       <LinearGradient
         colors={["#2C1810", "#3D2419"]}
         style={styles.background}
@@ -44,14 +49,14 @@ export default function WelcomeScreen() {
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <Image
-            source={require("../assets/images/chef-hat.svg")} // Assurez-vous que le chemin et l'extension sont corrects
+            source={require("../assets/images/chef-hat.svg")}
             style={{ width: 46, height: 46, tintColor: "#FFF5E9" }}
           />
         </View>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, styles.titleBatch]}>Batch</Text>
           <Text style={[styles.title, styles.titleCooka]}>Cooka'</Text>
-          <Text style={styles.slogan}>L'application qui t'aide à cuisiner efficacement</Text>
+          <Text style={styles.slogan}>L'application qui t'aide à cuisiner efficacement,</Text>
           <Text style={styles.sloganBold}>une bonne fois pour toute !</Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -80,6 +85,10 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  backgroundImage: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.2, // Réglez l'opacité ici
   },
   background: {
     ...StyleSheet.absoluteFillObject,
@@ -130,7 +139,10 @@ const styles = StyleSheet.create({
     color: "#FFF5E9",
     marginTop: 4,
     textAlign: "center",
-    letterSpacing: 1.2,
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    letterSpacing: 1.25,
   },
   sloganBold: {
     fontFamily: "LovedbytheKing",
@@ -138,8 +150,11 @@ const styles = StyleSheet.create({
     color: "#FFF5E9",
     marginTop: 0,
     textAlign: "center",
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
     fontWeight: "500",
-    letterSpacing: 1.2,
+    letterSpacing: 1.25,
   },
   buttonContainer: {
     width: "100%",
