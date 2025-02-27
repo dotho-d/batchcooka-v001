@@ -59,7 +59,7 @@ export default function WelcomeScreen() {
         <View style={styles.buttonContainer}>
           <Pressable
             style={[styles.button, styles.primaryButton]}
-            onPress={() => router.push("/auth/register")}
+            onPress={() => router.push("/(auth)/register")}
           >
             <Text style={[styles.buttonText, styles.primaryButtonText]}>
               S'inscrire
