@@ -56,7 +56,7 @@ export default function WelcomeScreen() {
           </Pressable>
           <Pressable
             style={[styles.button, styles.secondaryButton]}
-            onPress={() => router.push('/auth/discover')}
+            onPress={() => router.push('/discover')}
           >
             <Text style={[styles.buttonText, styles.secondaryButtonText]}>
               Découvrir
