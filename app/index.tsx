@@ -37,11 +37,6 @@ export default function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/images/home_screen_bg.png")}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      />
       <LinearGradient
         colors={["#2C1810", "#3D2419"]}
         style={styles.background}
@@ -49,7 +44,7 @@ export default function WelcomeScreen() {
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <Image
-            source={require("../assets/images/chef-hat.svg")}
+            source={require("../assets/images/chef-hat.svg")} // Assurez-vous que le chemin et l'extension sont corrects
             style={{ width: 46, height: 46, tintColor: "#FFF5E9" }}
           />
         </View>
@@ -62,7 +57,7 @@ export default function WelcomeScreen() {
         <View style={styles.buttonContainer}>
           <Pressable
             style={[styles.button, styles.primaryButton]}
-            onPress={() => router.push("/(auth)/register")}
+            onPress={() => router.push("/auth/register")}
           >
             <Text style={[styles.buttonText, styles.primaryButtonText]}>
               S'inscrire
@@ -85,10 +80,6 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  backgroundImage: {
-    ...StyleSheet.absoluteFillObject,
-    opacity: 0.8,
   },
   background: {
     ...StyleSheet.absoluteFillObject,
@@ -139,10 +130,7 @@ const styles = StyleSheet.create({
     color: "#FFF5E9",
     marginTop: 4,
     textAlign: "center",
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
-    letterSpacing: 1.25,
+    letterSpacing: 1.2,
   },
   sloganBold: {
     fontFamily: "LovedbytheKing",
@@ -150,11 +138,8 @@ const styles = StyleSheet.create({
     color: "#FFF5E9",
     marginTop: 0,
     textAlign: "center",
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
     fontWeight: "500",
-    letterSpacing: 1.25,
+    letterSpacing: 1.2,
   },
   buttonContainer: {
     width: "100%",
@@ -169,18 +154,11 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     backgroundColor: "#FF6B35",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
     elevation: 5,
   },
   secondaryButton: {
     backgroundColor: "transparent",
-    borderWidth: 2,
+    borderWidth: 1.46,
     borderColor: "#FF6B35",
   },
   buttonText: {
