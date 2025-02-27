@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, ActivityIndicator, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import NoiseTexture from "../components/NoiseTexture.tsx";
 
 // Chemin vers la police locale
 const customFonts = {
@@ -37,6 +38,7 @@ export default function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
+      <NoiseTexture opacity={0.2} />
       <LinearGradient
         colors={["#2C1810", "#3D2419"]}
         style={styles.background}
@@ -44,7 +46,7 @@ export default function WelcomeScreen() {
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <Image
-            source={require("../assets/images/chef-hat.svg")} // Assurez-vous que le chemin et l'extension sont corrects
+            source={require("../assets/images/chef-hat.svg")}
             style={{ width: 46, height: 46, tintColor: "#FFF5E9" }}
           />
         </View>
@@ -111,9 +113,6 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontFamily: "RockSalt",
     color: "#FFF5E9",
-    textShadowColor: "rgba(0, 0, 0, 0.3)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3,
   },
   titleBatch: {
     transform: [{ rotate: "-8deg" }],
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
   },
   secondaryButton: {
     backgroundColor: "transparent",
-    borderWidth: 1.46,
+    borderWidth: 2,
     borderColor: "#FF6B35",
   },
   buttonText: {
