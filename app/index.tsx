@@ -1,10 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, Pressable, ActivityIndicator, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { ChefHat } from "../assets/images/chef-hat";
 
 // Chemin vers la police locale
 const customFonts = {
@@ -44,12 +43,15 @@ export default function WelcomeScreen() {
       />
       <View style={styles.content}>
         <View style={styles.iconContainer}>
-          <ChefHat size={46} color="#FFF5E9" strokeWidth={1} />
+          <Image
+            source={require("../assets/images/chef-hat.png")} // Assurez-vous que le chemin et l'extension sont corrects
+            style={{ width: 46, height: 46, tintColor: "#FFF5E9" }}
+          />
         </View>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, styles.titleBatch]}>Batch</Text>
           <Text style={[styles.title, styles.titleCooka]}>Cooka'</Text>
-          <Text style={styles.slogan}>L'application qui t'aide à cuisiner efficacement,</Text>
+          <Text style={styles.slogan}>L'application qui t'aide à cuisiner efficacement</Text>
           <Text style={styles.sloganBold}>une bonne fois pour toute !</Text>
         </View>
         <View style={styles.buttonContainer}>
