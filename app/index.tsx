@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { ChefHat } from "../assets/images/chef-hat";
+import { ChefHat } from "../assets/images/chef-hat.svg";
 
 // Chemin vers la police locale
 const customFonts = {
