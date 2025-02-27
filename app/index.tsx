@@ -13,9 +13,9 @@ import { useFonts } from 'expo-font';
 
 // Chemin vers la police locale
 const customFonts = {
-  RockSalt: require('./asset/fonts/RockSalt-Regular.ttf'),
-  LovedbytheKing: require('./asset/fonts/LovedbytheKing-Regular.ttf'),
-  Gruppo: require('./asset/fonts/Gruppo-Regular.ttf'),
+  RockSalt: require('./assets/fonts/RockSalt-Regular.ttf'),
+  LovedbytheKing: require('./assets/fonts/LovedbytheKing-Regular.ttf'),
+  Gruppo: require('./assets/fonts/Gruppo-Regular.ttf'),
 };
 
 export default function WelcomeScreen() {
