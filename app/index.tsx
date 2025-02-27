@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import NoiseTexture from "../components/NoiseTexture.tsx";
+import NoiseTexture from "../components/NoiseTexture";
 
 // Chemin vers la police locale
 const customFonts = {
