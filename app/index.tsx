@@ -44,7 +44,7 @@ export default function WelcomeScreen() {
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <Image
-            source={require("../assets/images/chef-hat.png")} // Assurez-vous que le chemin et l'extension sont corrects
+            source={require("../assets/images/chef-hat.svg")} // Assurez-vous que le chemin et l'extension sont corrects
             style={{ width: 46, height: 46, tintColor: "#FFF5E9" }}
           />
         </View>
