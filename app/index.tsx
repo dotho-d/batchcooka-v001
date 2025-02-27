@@ -38,7 +38,7 @@ export default function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
-      <NoiseTexture opacity={0.2} />
+      <NoiseTexture opacity={0.146} />
       <LinearGradient
         colors={["#2C1810", "#3D2419"]}
         style={styles.background}
