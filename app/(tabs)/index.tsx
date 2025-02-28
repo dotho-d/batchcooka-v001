@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, Image, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, RockSalt_400Regular } from '@expo-google-fonts/rock-salt';
-import { ActivityIndicator } from 'react-native';
 import { ChevronRight } from 'lucide-react-native';
+import LoadingScreen from '../../components/LoadingScreen';
 
 export default function HomeScreen() {
   const [fontsLoaded] = useFonts({
@@ -10,11 +10,7 @@ export default function HomeScreen() {
   });
 
   if (!fontsLoaded) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#FF6B35" />
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   return (
