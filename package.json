@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
     "dev": "EXPO_NO_TELEMETRY=1 NODE_OPTIONS=--max_old_space_size=4096 expo start",
     "build:web": "NODE_OPTIONS=--max_old_space_size=4096 expo export --platform web",
     "lint": "expo lint"
