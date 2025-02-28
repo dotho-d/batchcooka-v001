@@ -1,9 +1,10 @@
 import { useFonts } from 'expo-font';
-import { Text, View, StyleSheet, Pressable, Image, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, Pressable, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import NoiseTexture from '../components/NoiseTexture';
 import Particles from '../components/Particles';
+import LoadingScreen from '../components/LoadingScreen';
 
 export default function WelcomeScreen() {
   const router = useRouter();
@@ -17,11 +18,7 @@ export default function WelcomeScreen() {
   const [fontsLoaded] = useFonts(customFonts);
 
   if (!fontsLoaded) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#FF6B35" />
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   return (
