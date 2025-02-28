@@ -1,5 +1,6 @@
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import React from "react";
+
+import { View, StyleSheet, Image } from "react-native";
 
 interface NoiseTextureProps {
   opacity?: number;
