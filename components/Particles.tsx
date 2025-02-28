@@ -23,10 +23,10 @@ interface ParticleProps {
 }
 
 const Particles: React.FC<ParticleProps> = ({
-  count = 40, // More particles but very subtle
+  count = 34, // More particles but very subtle
   color = '#FFF5E9',
   minSize = 0.2, // Very small minimum size
-  maxSize = 2.5, // Increased maximum size for more variation
+  maxSize = 2.4, // Increased maximum size for more variation
   minDuration = 15000,
   maxDuration = 25000,
 }) => {
@@ -107,10 +107,10 @@ const Particle: React.FC<SingleParticleProps> = ({
   useEffect(() => {
     // Very slow, subtle movement
     const verticalDirection = Math.random() > 0.5 ? -1 : 1;
-    const verticalDistance = (Math.random() * 0.2 + 0.05) * height * verticalDirection;
+    const verticalDistance = (Math.random() * 0.24 + 0.06) * height * verticalDirection;
     const targetY = initialY + verticalDistance;
 
-    const horizontalDistance = (Math.random() * 0.2 + 0.05) * width * direction;
+    const horizontalDistance = (Math.random() * 0.2 + 0.1) * width * direction;
     const targetX = initialX + horizontalDistance;
 
     // Slower movement for dust-like effect
