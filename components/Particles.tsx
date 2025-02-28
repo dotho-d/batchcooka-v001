@@ -23,26 +23,23 @@ interface ParticleProps {
 }
 
 const Particles: React.FC<ParticleProps> = ({
-  count = 34, // More particles but very subtle
+  count = 20, // Reduced count from 34 to 20
   color = '#FFF5E9',
-  minSize = 0.2, // Very small minimum size
-  maxSize = 2.4, // Increased maximum size for more variation
+  minSize = 0.2,
+  maxSize = 2.4,
   minDuration = 15000,
   maxDuration = 25000,
 }) => {
   const particles = React.useMemo(() => {
     return Array.from({ length: count }).map((_, i) => {
-      // Use a non-linear distribution to create more size variation
-      // This creates a bias toward smaller particles but allows for some larger ones
-      const sizeRandom = Math.pow(Math.random(), 1.5); // Power distribution favors smaller values
+      const sizeRandom = Math.pow(Math.random(), 1.5);
       const size = minSize + sizeRandom * (maxSize - minSize);
       
       const initialX = Math.random() * width;
       const initialY = Math.random() * height;
       const duration = Math.random() * (maxDuration - minDuration) + minDuration;
-      const delay = Math.random() * 10000; // Longer random delay for more natural appearance
+      const delay = Math.random() * 5000; // Reduced from 10000 to 5000
       
-      // Adjust opacity based on size - larger particles can be slightly more visible
       const baseOpacity = Math.min(0.1 + (size / maxSize) * 0.3, 0.4);
       const direction = Math.random() > 0.5 ? 1 : -1;
 
@@ -105,23 +102,20 @@ const Particle: React.FC<SingleParticleProps> = ({
   const particleOpacity = useSharedValue(baseOpacity);
 
   useEffect(() => {
-    // Very slow, subtle movement
+    // Simplified movement logic
     const verticalDirection = Math.random() > 0.5 ? -1 : 1;
-    const verticalDistance = (Math.random() * 0.24 + 0.06) * height * verticalDirection;
+    const verticalDistance = (Math.random() * 0.2 + 0.05) * height * verticalDirection;
     const targetY = initialY + verticalDistance;
 
-    const horizontalDistance = (Math.random() * 0.2 + 0.1) * width * direction;
+    const horizontalDistance = (Math.random() * 0.15 + 0.05) * width * direction;
     const targetX = initialX + horizontalDistance;
 
-    // Slower movement for dust-like effect
-    const durationX = duration * (1.2 + Math.random() * 0.8);
-    const durationY = duration * (1.2 + Math.random() * 0.8);
-
+    // Simplified timing
     translateY.value = withDelay(
       delay,
       withRepeat(
         withTiming(targetY, {
-          duration: durationY,
+          duration: duration,
           easing: Easing.linear,
         }),
         -1,
@@ -133,7 +127,7 @@ const Particle: React.FC<SingleParticleProps> = ({
       delay,
       withRepeat(
         withTiming(targetX, {
-          duration: durationX,
+          duration: duration,
           easing: Easing.linear,
         }),
         -1,
@@ -141,13 +135,12 @@ const Particle: React.FC<SingleParticleProps> = ({
       )
     );
 
-    // Subtle scale changes
-    const scaleTarget = Math.random() * 0.4 + 0.8;
+    // Simplified scale animation
     scale.value = withDelay(
       delay,
       withRepeat(
-        withTiming(scaleTarget, {
-          duration: duration * (0.8 + Math.random() * 0.4),
+        withTiming(Math.random() * 0.3 + 0.85, {
+          duration: duration,
           easing: Easing.linear,
         }),
         -1,
@@ -155,46 +148,23 @@ const Particle: React.FC<SingleParticleProps> = ({
       )
     );
 
-    // Create random "flicker" effect where particles briefly shine
-    const setupFlicker = () => {
-      const flickerDelay = Math.random() * 8000; // Random delay between flickers
-      const flickerDuration = Math.random() * 300 + 100; // Very brief shine (100-400ms)
-      const peakOpacity = Math.random() * 0.3 + 0.2; // Slightly brighter when shining (0.2-0.5)
-      
-      setTimeout(() => {
+    // Simplified flicker effect
+    const flickerInterval = setInterval(() => {
+      if (Math.random() > 0.7) { // Only flicker occasionally
+        const peakOpacity = Math.random() * 0.3 + 0.2;
         particleOpacity.value = withSequence(
-          // Fade in quickly
-          withTiming(peakOpacity, { 
-            duration: flickerDuration / 3,
-            easing: Easing.inOut(Easing.cubic)
-          }),
-          // Hold briefly at peak brightness
-          withTiming(peakOpacity, { 
-            duration: flickerDuration / 3
-          }),
-          // Fade out
-          withTiming(baseOpacity, { 
-            duration: flickerDuration / 3,
-            easing: Easing.inOut(Easing.cubic)
-          })
+          withTiming(peakOpacity, { duration: 200 }),
+          withTiming(baseOpacity, { duration: 200 })
         );
-        
-        // Setup the next flicker
-        setupFlicker();
-      }, flickerDelay);
-    };
-    
-    // Start the flickering cycle after initial delay
-    const initialFlickerTimeout = setTimeout(() => {
-      setupFlicker();
-    }, delay);
+      }
+    }, 3000);
 
     return () => {
       cancelAnimation(translateY);
       cancelAnimation(translateX);
       cancelAnimation(scale);
       cancelAnimation(particleOpacity);
-      clearTimeout(initialFlickerTimeout);
+      clearInterval(flickerInterval);
     };
   }, []);
 
