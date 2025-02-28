@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     borderColor: "#FF6B35",
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "600",
     fontFamily: "Gruppo",
     paddingHorizontal: 8,
