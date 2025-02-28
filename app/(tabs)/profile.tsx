@@ -1,8 +1,25 @@
 import { View, Text, StyleSheet, Image, ScrollView, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Settings, Heart, Clock, BookOpen } from 'lucide-react-native';
+import LoadingScreen from '../../components/LoadingScreen';
+import { useState, useEffect } from 'react';
 
 export default function ProfileScreen() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <LinearGradient
       colors={['#2C1810', '#3D2419']}
