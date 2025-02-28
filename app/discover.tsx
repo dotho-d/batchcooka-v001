@@ -33,7 +33,7 @@ export default function DiscoverScreen() {
       
       <View style={styles.header}>
         <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <ArrowLeft size={21} color="#FFF5E9" />
+          <ArrowLeft size={24} color="#FFF5E9" />
         </Pressable>
         <Text style={styles.headerTitle}>Découvrir</Text>
       </View>
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 15,
+    paddingTop: 30,
     paddingHorizontal: 15,
     paddingBottom: 30,
   },
   backButton: {
     marginRight: 15,
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     borderRadius: 20,
     backgroundColor: 'rgba(255, 107, 53, 0.2)',
     justifyContent: 'center',
