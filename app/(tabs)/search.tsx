@@ -1,11 +1,26 @@
 import { View, Text, StyleSheet, TextInput, ScrollView, Pressable, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Search as SearchIcon, Filter, X } from 'lucide-react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import LoadingScreen from '../../components/LoadingScreen';
 
 export default function SearchScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('Tout');
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Simulate loading delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
   
   return (
     <LinearGradient
