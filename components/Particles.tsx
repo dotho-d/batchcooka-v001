@@ -6,6 +6,7 @@ import Animated, {
   withTiming,
   withRepeat,
   withDelay,
+  withSequence,
   Easing,
   cancelAnimation,
 } from 'react-native-reanimated';
@@ -22,21 +23,27 @@ interface ParticleProps {
 }
 
 const Particles: React.FC<ParticleProps> = ({
-  count = 10,
+  count = 40, // More particles but very subtle
   color = '#FFF5E9',
-  minSize = 1,
-  maxSize = 3,
+  minSize = 0.2, // Very small minimum size
+  maxSize = 2.5, // Increased maximum size for more variation
   minDuration = 15000,
   maxDuration = 25000,
 }) => {
   const particles = React.useMemo(() => {
     return Array.from({ length: count }).map((_, i) => {
-      const size = Math.random() * (maxSize - minSize) + minSize;
+      // Use a non-linear distribution to create more size variation
+      // This creates a bias toward smaller particles but allows for some larger ones
+      const sizeRandom = Math.pow(Math.random(), 1.5); // Power distribution favors smaller values
+      const size = minSize + sizeRandom * (maxSize - minSize);
+      
       const initialX = Math.random() * width;
       const initialY = Math.random() * height;
       const duration = Math.random() * (maxDuration - minDuration) + minDuration;
-      const delay = Math.random() * 8000;
-      const opacity = Math.random() * 0.5 + 0.1;
+      const delay = Math.random() * 10000; // Longer random delay for more natural appearance
+      
+      // Adjust opacity based on size - larger particles can be slightly more visible
+      const baseOpacity = Math.min(0.1 + (size / maxSize) * 0.3, 0.4);
       const direction = Math.random() > 0.5 ? 1 : -1;
 
       return {
@@ -46,7 +53,7 @@ const Particles: React.FC<ParticleProps> = ({
         initialY,
         duration,
         delay,
-        opacity,
+        baseOpacity,
         direction,
       };
     });
@@ -63,7 +70,7 @@ const Particles: React.FC<ParticleProps> = ({
           duration={particle.duration}
           delay={particle.delay}
           color={color}
-          opacity={particle.opacity}
+          baseOpacity={particle.baseOpacity}
           direction={particle.direction}
         />
       ))}
@@ -78,7 +85,7 @@ interface SingleParticleProps {
   duration: number;
   delay: number;
   color: string;
-  opacity: number;
+  baseOpacity: number;
   direction: number;
 }
 
@@ -89,24 +96,26 @@ const Particle: React.FC<SingleParticleProps> = ({
   duration,
   delay,
   color,
-  opacity,
+  baseOpacity,
   direction,
 }) => {
   const translateY = useSharedValue(initialY);
   const translateX = useSharedValue(initialX);
   const scale = useSharedValue(1);
-  const particleOpacity = useSharedValue(opacity);
+  const particleOpacity = useSharedValue(baseOpacity);
 
   useEffect(() => {
-    const verticalDirection = Math.random() > 0.3 ? -1 : 1;
-    const verticalDistance = (Math.random() * 0.3 + 0.1) * height * verticalDirection;
+    // Very slow, subtle movement
+    const verticalDirection = Math.random() > 0.5 ? -1 : 1;
+    const verticalDistance = (Math.random() * 0.2 + 0.05) * height * verticalDirection;
     const targetY = initialY + verticalDistance;
 
-    const horizontalDistance = (Math.random() * 0.3 + 0.1) * width * direction;
+    const horizontalDistance = (Math.random() * 0.2 + 0.05) * width * direction;
     const targetX = initialX + horizontalDistance;
 
-    const durationX = duration * (0.8 + Math.random() * 0.4);
-    const durationY = duration * (0.8 + Math.random() * 0.4);
+    // Slower movement for dust-like effect
+    const durationX = duration * (1.2 + Math.random() * 0.8);
+    const durationY = duration * (1.2 + Math.random() * 0.8);
 
     translateY.value = withDelay(
       delay,
@@ -132,12 +141,13 @@ const Particle: React.FC<SingleParticleProps> = ({
       )
     );
 
-    const scaleTarget = Math.random() * 0.7 + 0.5;
+    // Subtle scale changes
+    const scaleTarget = Math.random() * 0.4 + 0.8;
     scale.value = withDelay(
       delay,
       withRepeat(
         withTiming(scaleTarget, {
-          duration: duration * (0.5 + Math.random() * 0.5),
+          duration: duration * (0.8 + Math.random() * 0.4),
           easing: Easing.linear,
         }),
         -1,
@@ -145,24 +155,46 @@ const Particle: React.FC<SingleParticleProps> = ({
       )
     );
 
-    const opacityTarget = Math.random() * 0.3 + 0.05;
-    particleOpacity.value = withDelay(
-      delay,
-      withRepeat(
-        withTiming(opacityTarget, {
-          duration: duration * (0.6 + Math.random() * 0.4),
-          easing: Easing.linear,
-        }),
-        -1,
-        true
-      )
-    );
+    // Create random "flicker" effect where particles briefly shine
+    const setupFlicker = () => {
+      const flickerDelay = Math.random() * 8000; // Random delay between flickers
+      const flickerDuration = Math.random() * 300 + 100; // Very brief shine (100-400ms)
+      const peakOpacity = Math.random() * 0.3 + 0.2; // Slightly brighter when shining (0.2-0.5)
+      
+      setTimeout(() => {
+        particleOpacity.value = withSequence(
+          // Fade in quickly
+          withTiming(peakOpacity, { 
+            duration: flickerDuration / 3,
+            easing: Easing.inOut(Easing.cubic)
+          }),
+          // Hold briefly at peak brightness
+          withTiming(peakOpacity, { 
+            duration: flickerDuration / 3
+          }),
+          // Fade out
+          withTiming(baseOpacity, { 
+            duration: flickerDuration / 3,
+            easing: Easing.inOut(Easing.cubic)
+          })
+        );
+        
+        // Setup the next flicker
+        setupFlicker();
+      }, flickerDelay);
+    };
+    
+    // Start the flickering cycle after initial delay
+    const initialFlickerTimeout = setTimeout(() => {
+      setupFlicker();
+    }, delay);
 
     return () => {
       cancelAnimation(translateY);
       cancelAnimation(translateX);
       cancelAnimation(scale);
       cancelAnimation(particleOpacity);
+      clearTimeout(initialFlickerTimeout);
     };
   }, []);
 
@@ -197,6 +229,7 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     overflow: 'hidden',
+    zIndex: 1,
   },
 });
 
