@@ -1,5 +1,5 @@
 import { useFonts } from 'expo-font';
-import { Text, View, StyleSheet, Pressable, Image } from 'react-native';
+import { Text, View, StyleSheet, Pressable, Image, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import NoiseTexture from '../components/NoiseTexture';
