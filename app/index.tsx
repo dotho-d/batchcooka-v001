@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { useFonts } from 'expo-font';
+import { Text, View, StyleSheet, Pressable, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import NoiseTexture from '../components/NoiseTexture';
@@ -7,6 +7,22 @@ import Particles from '../components/Particles';
 
 export default function WelcomeScreen() {
   const router = useRouter();
+
+  const customFonts = {
+    RockSalt: require("../assets/fonts/RockSalt-Regular.ttf"),
+    LovedbytheKing: require("../assets/fonts/LovedbytheKing-Regular.ttf"),
+    Gruppo: require("../assets/fonts/Gruppo-Regular.ttf"),
+  };
+
+  const [fontsLoaded] = useFonts(customFonts);
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#FF6B35" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -65,6 +81,12 @@ const styles = StyleSheet.create({
   },
   background: {
     ...StyleSheet.absoluteFillObject,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2C1810",
   },
   content: {
     flex: 1,
