@@ -26,18 +26,18 @@ export default function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
-      <NoiseTexture opacity={0.2} />
-      <Particles
-        count={10}
-        color="#FFF5E9"
-        minSize={1}
-        maxSize={3}
-        minDuration={15000}
-        maxDuration={25000}
-      />
       <LinearGradient
         colors={["#2C1810", "#3D2419"]}
         style={styles.background}
+      />
+      <NoiseTexture opacity={0.2} />
+      <Particles
+        count={34}
+        color="#FFF5E9"
+        minSize={0.4}
+        maxSize={2.4}
+        minDuration={15000}
+        maxDuration={25000}
       />
       <View style={styles.content}>
         <View style={styles.iconContainer}>
@@ -49,7 +49,7 @@ export default function WelcomeScreen() {
         <View style={styles.titleContainer}>
           <Text style={[styles.title, styles.titleBatch]}>Batch</Text>
           <Text style={[styles.title, styles.titleCooka]}>Cooka&apos;</Text>
-          <Text style={styles.slogan}>L&apos;application qui t&apos;aide à cuisiner efficacement,</Text>
+          <Text style={styles.slogan}>L&apos;application qui t&apos;aide à cuisiner efficacement</Text>
           <Text style={styles.sloganBold}>une bonne fois pour toute !</Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -78,9 +78,11 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
   },
   background: {
     ...StyleSheet.absoluteFillObject,
+    zIndex: 0,
   },
   loadingContainer: {
     flex: 1,
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingTop: "15%",
     paddingHorizontal: 24,
-    zIndex: 2,
+    zIndex: 3,
   },
   iconContainer: {
     marginBottom: 10,
