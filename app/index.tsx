@@ -26,7 +26,7 @@ export default function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
-      <NoiseTexture opacity={0.15} />
+      <NoiseTexture opacity={0.2} />
       <Particles
         count={10}
         color="#FFF5E9"
