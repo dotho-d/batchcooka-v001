@@ -1,46 +1,24 @@
-import React from "react";
-
-import { useFonts } from "expo-font";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { View, Text, StyleSheet, Pressable, ActivityIndicator, Image } from "react-native";
-
-import NoiseTexture from "../components/NoiseTexture";
-
-// Chemin vers la police locale
-const customFonts = {
-  RockSalt: require("../assets/fonts/RockSalt-Regular.ttf"),
-  LovedbytheKing: require("../assets/fonts/LovedbytheKing-Regular.ttf"),
-  Gruppo: require("../assets/fonts/Gruppo-Regular.ttf"),
-};
+import React from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import NoiseTexture from '../components/NoiseTexture';
+import Particles from '../components/Particles';
 
 export default function WelcomeScreen() {
   const router = useRouter();
 
-  const [fontsLoaded] = useFonts(customFonts);
-
-  // Garder l'écran de démarrage visible jusqu'à ce que les polices soient chargées
-  React.useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-    }
-    prepare();
-  }, []);
-
-  if (!fontsLoaded) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#FF6B35" />
-      </View>
-    );
-  } else {
-    SplashScreen.hideAsync();
-  }
-
   return (
     <View style={styles.container}>
-      <NoiseTexture opacity={0.2} />
+      <NoiseTexture opacity={0.15} />
+      <Particles
+        count={10}
+        color="#FFF5E9"
+        minSize={1}
+        maxSize={3}
+        minDuration={15000}
+        maxDuration={25000}
+      />
       <LinearGradient
         colors={["#2C1810", "#3D2419"]}
         style={styles.background}
@@ -87,12 +65,6 @@ const styles = StyleSheet.create({
   },
   background: {
     ...StyleSheet.absoluteFillObject,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#2C1810",
   },
   content: {
     flex: 1,
