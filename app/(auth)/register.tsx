@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from "react-native";
 
 export default function RegisterScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Page d'inscription</Text>
+      <Text style={styles.text}>Page d&apos;inscription</Text>
     </View>
   );
 }

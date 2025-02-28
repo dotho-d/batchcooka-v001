@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, ActivityIndicator, Image } from "react-native";
-import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
-import * as SplashScreen from "expo-splash-screen";
+
 import { useFonts } from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { View, Text, StyleSheet, Pressable, ActivityIndicator, Image } from "react-native";
+
 import NoiseTexture from "../components/NoiseTexture";
 
 // Chemin vers la police locale
@@ -52,8 +54,8 @@ export default function WelcomeScreen() {
         </View>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, styles.titleBatch]}>Batch</Text>
-          <Text style={[styles.title, styles.titleCooka]}>Cooka'</Text>
-          <Text style={styles.slogan}>L'application qui t'aide à cuisiner efficacement,</Text>
+          <Text style={[styles.title, styles.titleCooka]}>Cooka&apos;</Text>
+          <Text style={styles.slogan}>L&apos;application qui t&apos;aide à cuisiner efficacement,</Text>
           <Text style={styles.sloganBold}>une bonne fois pour toute !</Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -62,7 +64,7 @@ export default function WelcomeScreen() {
             onPress={() => router.push("/(auth)/register")}
           >
             <Text style={[styles.buttonText, styles.primaryButtonText]}>
-              S'inscrire
+              S&apos;inscrire
             </Text>
           </Pressable>
           <Pressable
